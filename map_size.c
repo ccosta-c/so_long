@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:16:44 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/16 11:18:22 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:10:36 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,37 +61,16 @@ int get_width(char *file)
 	return (i);
 }
 
-
 int		check_borders(char **map, t_coordinates size_map)
 {
-	int	ix;
-	int	iy;
-
-	ix = 0;
-	iy = 0;
-	while(++ix < (size_map.x - 1))
-	{
-		if (map[iy][ix] != '1')
-			return(0);
-	}
-	iy--;
-	while(++iy < size_map.y)
-	{
-		if (map[iy][ix] != '1')
-			return(0);
-	}
-	iy--;
-	while(--ix > 0)
-	{
-		if (map[iy][ix] != '1')
-			return(0);
-	}
-	iy++;
-	while(--iy > 0)
-	{
-		if (map[iy][ix] != '1')
-			return(0);
-	}
+	if (check_line(map, 0, 0, size_map))
+		return (0);
+	if (check_row(map, (size_map.x - 1), 0, size_map))
+		return (0);	
+	if (check_line(map, 0, (size_map.y - 1), size_map))
+		return (0);
+	if (check_row(map, 0, 0, size_map))
+		return (0);	
 	return (1);
 }
 

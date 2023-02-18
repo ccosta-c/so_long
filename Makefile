@@ -6,7 +6,7 @@
 #    By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 09:58:27 by ccosta-c          #+#    #+#              #
-#    Updated: 2023/02/16 10:04:20 by ccosta-c         ###   ########.fr        #
+#    Updated: 2023/02/16 15:07:45 by ccosta-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,12 +40,14 @@ LIBFT		= libft
 LIBX 		= mlx
 
 #_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_ FILES _/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_
-OBJS			= check_map.o ft_print_array.o get_map.o map_size.o
+SRC				= check_map.c ft_print_array.c get_map.c map_size.c utils.c draw_windows.c
+OBJS 			:= $(SRC:.c=.o)
 OBJS_BONUS		= 
 NAME			= so_long
 NAME_BONUS		= so_long
 TARGET			= $(addprefix $(SRCS)/, $(OBJS))
 TARGET_BONUS	= $(addprefix $(SRCS_BONUS)/, $(OBJS_BONUS))
+
 
 #_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_ RULES _/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_
 all: $(NAME)
@@ -70,7 +72,10 @@ clean:
 fclean: clean
 	make fclean $(MKFLAGS) -C $(LIBFT)
 	echo "[$(RED) Deleted $(RESET)] $(GREEN)so_long$(RESET)"
-	$(RM) $(NAME) 
+	$(RM) $(NAME)
+
+debug:
+	$(CC) $(CFLAGS) $(LIBXFLAGS) main.c $(SRC) libft/libft.a mlx/libmlx.a -g
 
 #bonus: $(TARGET_BONUS)
 #	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $(GREEN)libft/*$(RESET)"

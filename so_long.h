@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:39:10 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/16 11:16:58 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/16 13:57:34 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,3 +53,5 @@ int				map_checker(char **map, t_mapcheck data, t_coordinates dimensions);
 int				check_quant(char **map, t_mapcheck *data);
 int				check_borders(char **map, t_coordinates size_map);
 int				draw_windows(t_data *windows, t_coordinates *dimensions);
+int				check_line(char **map, int x, int y, t_coordinates size_map);
+int				check_row(char **map, int x, int y, t_coordinates size_map);

@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 08:55:27 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/15 19:06:59 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/16 13:59:52 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	check_map_info(char **map, t_mapcheck *data)
 	data->collectibles_found = 0;
 	data->players = 0;
 	data->found_exit = 0;
+	data->exits = 0;
 	if(check_quant(map, data))
 	{
 		ft_printf("Invalid characters in the file.");

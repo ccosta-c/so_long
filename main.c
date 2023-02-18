@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:38:55 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/16 11:16:03 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:25:03 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	main(int argc, char **argv)
 {
-	t_coordinates dimensions;
-	//t_data windows;
-	t_mapcheck map_data;
-	char **map_array;
+	t_coordinates 	dimensions;
+	t_data 			windows;
+	t_mapcheck 		map_data;
+	char 			**map_array;
 
 	if (argc != 2)
 		return(0);
@@ -33,6 +33,6 @@ int	main(int argc, char **argv)
 	}
 	if (!(map_checker(map_array, map_data, dimensions)))
 		return (0);
-	//draw_windows(&windows, &dimensions);
+	draw_windows(&windows, &dimensions);
 	return(0);
 }
