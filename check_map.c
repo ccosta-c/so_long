@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 08:55:27 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/16 13:59:52 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/20 14:36:02 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,23 @@ int	map_checker(char **map, t_mapcheck data, t_coordinates dimensions)
 {
 	if(!(check_borders(map, dimensions)))
 	{
-		ft_printf("The map doesen't have valid borders.");
+		ft_printf("The map doesen't have valid borders.\n");
 		return (0);
 	}
 	ft_printf("Number of Collectibles - %d\n", data.collectibles);
   	ft_printf("Player Position X-%d Y-%d\n", data.x, data.y);
 	if(data.exits != 1 || data.players != 1)
 	{	
-		ft_printf("Map is not valid.");
+		ft_printf("Map is not valid.\n");
 		return (0);
 	}
 	check_map(map, &data, data.x, data.y);
 	if((data.collectibles_found != data.collectibles) || (data.found_exit != 1))
 	{
-		ft_printf("Map is not valid.");
+		ft_printf("Map is not valid.\n");
 		return (0);
 	}
-	ft_printf("Map is valid!");
+	ft_printf("Map is valid!\n");
 	return (1);
 }
 

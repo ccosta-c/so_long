@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:39:10 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/16 13:57:34 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:04:21 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,29 @@ typedef struct s_mapcheck
 	int players;
 }	t_mapcheck;
 
-typedef struct s_data
+typedef struct s_windows
 {
 	void	*mlx_ptr;
     void	*win_ptr;
-}	t_data;
+}	t_windows;
+
+
+typedef struct s_xpm
+{
+	void	*xpm_ptr;
+    char	*path;
+	int		width;
+	int		height;
+}	t_xpm;
+
+typedef struct s_texture
+{
+	t_xpm	wall;
+	t_xpm	floor;
+	t_xpm	coins;
+	t_xpm	exit;
+	t_xpm	player;
+}	t_texture;
 
 int				get_height(char *file);
 int 			get_width(char *file);
@@ -52,6 +70,7 @@ int				check_map_info(char **map, t_mapcheck *data);
 int				map_checker(char **map, t_mapcheck data, t_coordinates dimensions);
 int				check_quant(char **map, t_mapcheck *data);
 int				check_borders(char **map, t_coordinates size_map);
-int				draw_windows(t_data *windows, t_coordinates *dimensions);
+int				draw_windows(t_windows *windows, t_coordinates *dimensions, char **map_array);
 int				check_line(char **map, int x, int y, t_coordinates size_map);
 int				check_row(char **map, int x, int y, t_coordinates size_map);
+void			free_array(char **array, int y);
