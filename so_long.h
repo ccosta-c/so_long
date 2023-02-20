@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:39:10 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/20 15:04:21 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/20 22:44:10 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include "libft/libft.h"
+
+#define WALL_PATH "./assets/wall.xpm"
+#define	FLOOR_PATH "./assets/floor.xpm"
 
 typedef struct s_coordinates
 {
@@ -41,20 +44,26 @@ typedef struct s_windows
 {
 	void	*mlx_ptr;
     void	*win_ptr;
+	void	*wall;
+	void	*floor;
+	int		floor_width;
+	int		floor_height;
+	int		wall_width;
+	int		wall_height;
+	char	**render_array;
 }	t_windows;
 
 
 typedef struct s_xpm
 {
 	void	*xpm_ptr;
-    char	*path;
 	int		width;
 	int		height;
 }	t_xpm;
 
 typedef struct s_texture
 {
-	t_xpm	wall;
+	t_xpm	tile;
 	t_xpm	floor;
 	t_xpm	coins;
 	t_xpm	exit;
@@ -74,3 +83,6 @@ int				draw_windows(t_windows *windows, t_coordinates *dimensions, char **map_ar
 int				check_line(char **map, int x, int y, t_coordinates size_map);
 int				check_row(char **map, int x, int y, t_coordinates size_map);
 void			free_array(char **array, int y);
+int				draw_map(t_windows *windows);
+int				handle_keypress(int keysym, t_windows *data);
+int				handle_no_event(void *data);
