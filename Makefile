@@ -6,7 +6,7 @@
 #    By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 09:58:27 by ccosta-c          #+#    #+#              #
-#    Updated: 2023/02/20 22:42:55 by ccosta-c         ###   ########.fr        #
+#    Updated: 2023/02/22 12:42:45 by ccosta-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ $(NAME): $(TARGET)
 	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $(GREEN)libft/*$(RESET)"
 	make $(MKFLAGS) -C $(LIBFT)
 	
-	$(CC) $(CFLAGS) main.c $(TARGET) $(LIBFTFLAGS) $(LIBXFLAGS) -g -o  $(NAME) -I $(DEPS)
+	$(CC) $(CFLAGS) main.c $(TARGET) $(LIBFTFLAGS) $(LIBXFLAGS) -o  $(NAME) -I $(DEPS)
 	
 	echo "$(GREEN)Done.$(RESET)"
 	
@@ -73,6 +73,9 @@ fclean: clean
 	make fclean $(MKFLAGS) -C $(LIBFT)
 	echo "[$(RED) Deleted $(RESET)] $(GREEN)so_long$(RESET)"
 	$(RM) $(NAME)
+
+debug:
+	$(CC) $(CFLAGS) $(LIBXFLAGS) main.c $(SRC) libft/libft.a mlx/libmlx.a -g
 
 #bonus: $(TARGET_BONUS)
 #	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $(GREEN)libft/*$(RESET)"

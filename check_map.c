@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 08:55:27 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/20 14:36:02 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/23 15:45:22 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	check_map(char **map, t_mapcheck *data, int x, int y)
 	}
 }
 
-int	map_checker(char **map, t_mapcheck data, t_coordinates dimensions)
+int	map_checker(char **map, t_mapcheck data, t_windows windows)
 {
-	if(!(check_borders(map, dimensions)))
+	if(!(check_borders(map, windows)))
 	{
 		ft_printf("The map doesen't have valid borders.\n");
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:39:10 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/20 22:44:10 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/23 15:48:54 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 
 #define WALL_PATH "./assets/wall.xpm"
 #define	FLOOR_PATH "./assets/floor.xpm"
+#define COLECTIBLE_PATH "./assets/collectible.xpm"
+#define DOOR_CLOSED_PATH "./assets/door_closed.xpm"
+#define IDLE_1 "./assets/idle_1.xpm"
+#define IDLE_2 "./assets/idle_2.xpm"
+#define IDLE_3 "./assets/idle_3.xpm"
+#define IDLE_4 "./assets/idle_4.xpm"
 
 typedef struct s_coordinates
 {
@@ -44,12 +50,32 @@ typedef struct s_windows
 {
 	void	*mlx_ptr;
     void	*win_ptr;
-	void	*wall;
+	int		x_size;
+	int		y_size;
 	void	*floor;
 	int		floor_width;
 	int		floor_height;
+	void	*wall;
 	int		wall_width;
 	int		wall_height;
+	void	*collectible;
+	int		collectible_width;
+	int		collectible_height;
+	void	*door_closed;
+	int		dc_width;
+	int		dc_height;
+	void	*idle_1;
+	int		idle_1_height;
+	int		idle_1_width;
+	void	*idle_2;
+	int		idle_2_height;
+	int		idle_2_width;
+	void	*idle_3;
+	int		idle_3_height;
+	int		idle_3_width;
+	void	*idle_4;
+	int		idle_4_height;
+	int		idle_4_width;
 	char	**render_array;
 }	t_windows;
 
@@ -72,17 +98,18 @@ typedef struct s_texture
 
 int				get_height(char *file);
 int 			get_width(char *file);
-int				get_map_size(t_coordinates *dimensions, char *file);
-char			**convert_map_to_array(t_coordinates dimensions, char *file);
+int				get_map_size(t_windows *windows, char *file);
+char			**convert_map_to_array(t_windows windows, char *file);
 void			ft_print_array (char **array);
 int				check_map_info(char **map, t_mapcheck *data);
-int				map_checker(char **map, t_mapcheck data, t_coordinates dimensions);
+int				map_checker(char **map, t_mapcheck data, t_windows windows);
 int				check_quant(char **map, t_mapcheck *data);
-int				check_borders(char **map, t_coordinates size_map);
-int				draw_windows(t_windows *windows, t_coordinates *dimensions, char **map_array);
-int				check_line(char **map, int x, int y, t_coordinates size_map);
-int				check_row(char **map, int x, int y, t_coordinates size_map);
+int				check_borders(char **map, t_windows windows);
+int				draw_windows(t_windows *windows);
+int				check_line(char **map, int x, int y, t_windows windows);
+int				check_row(char **map, int x, int y, t_windows windows);
 void			free_array(char **array, int y);
 int				draw_map(t_windows *windows);
 int				handle_keypress(int keysym, t_windows *data);
 int				handle_no_event(void *data);
+void			initialize(t_windows *windows);
