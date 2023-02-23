@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:39:10 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/23 15:48:54 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/23 18:40:56 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,35 +48,38 @@ typedef struct s_mapcheck
 
 typedef struct s_windows
 {
-	void	*mlx_ptr;
-    void	*win_ptr;
-	int		x_size;
-	int		y_size;
-	void	*floor;
-	int		floor_width;
-	int		floor_height;
-	void	*wall;
-	int		wall_width;
-	int		wall_height;
-	void	*collectible;
-	int		collectible_width;
-	int		collectible_height;
-	void	*door_closed;
-	int		dc_width;
-	int		dc_height;
-	void	*idle_1;
-	int		idle_1_height;
-	int		idle_1_width;
-	void	*idle_2;
-	int		idle_2_height;
-	int		idle_2_width;
-	void	*idle_3;
-	int		idle_3_height;
-	int		idle_3_width;
-	void	*idle_4;
-	int		idle_4_height;
-	int		idle_4_width;
-	char	**render_array;
+	void		*mlx_ptr;
+    void		*win_ptr;
+	int			x_player;
+	int			y_player;
+	int			x_size;
+	int			y_size;
+	void		*floor;
+	int			floor_width;
+	int			floor_height;
+	void		*wall;
+	int			wall_width;
+	int			wall_height;
+	void		*collectible;
+	int			collectible_width;
+	int			collectible_height;
+	void		*door_closed;
+	int			dc_width;
+	int			dc_height;
+	void		*idle_1;
+	int			idle_1_height;
+	int			idle_1_width;
+	void		*idle_2;
+	int			idle_2_height;
+	int			idle_2_width;
+	void		*idle_3;
+	int			idle_3_height;
+	int			idle_3_width;
+	void		*idle_4;
+	int			idle_4_height;
+	int			idle_4_width;
+	char		**render_array;
+	t_mapcheck 	*map_data;
 }	t_windows;
 
 
@@ -113,3 +116,5 @@ int				draw_map(t_windows *windows);
 int				handle_keypress(int keysym, t_windows *data);
 int				handle_no_event(void *data);
 void			initialize(t_windows *windows);
+void			player_animation(t_windows *windows, int x, int i, int j);
+void			change_array(t_windows *windows, int x, int y, char chr);

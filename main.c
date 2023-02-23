@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:38:55 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/23 16:46:18 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/23 18:53:05 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	main(int argc, char **argv)
 	}
 	if (!(map_checker(map_array, map_data, windows)))
 		return (0);
+	windows.x_player = map_data.x;
+	windows.y_player = map_data.y;
 	free_array(map_array, windows.y_size);
 	windows.render_array = convert_map_to_array(windows, argv[1]);
 	draw_windows(&windows);
