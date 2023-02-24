@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:38:55 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/24 17:36:02 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/24 18:43:01 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ void	initialize(t_windows *windows)
 	windows->idle_2 = mlx_xpm_file_to_image(windows->mlx_ptr, IDLE_2, &windows->idle_2_width, &windows->idle_2_height);
 	windows->idle_3 = mlx_xpm_file_to_image(windows->mlx_ptr, IDLE_3, &windows->idle_3_width, &windows->idle_3_height);
 	windows->idle_4 = mlx_xpm_file_to_image(windows->mlx_ptr, IDLE_4, &windows->idle_4_width, &windows->idle_4_height);
+	windows->enemy_1 = mlx_xpm_file_to_image(windows->mlx_ptr, ENEMY_1, &windows->enemy_1_width, &windows->enemy_1_height);
+	windows->enemy_2 = mlx_xpm_file_to_image(windows->mlx_ptr, ENEMY_2, &windows->enemy_2_width, &windows->enemy_2_height);
+	windows->enemy_3 = mlx_xpm_file_to_image(windows->mlx_ptr, ENEMY_3, &windows->enemy_3_width, &windows->enemy_3_height);
+	windows->enemy_4 = mlx_xpm_file_to_image(windows->mlx_ptr, ENEMY_4, &windows->enemy_4_width, &windows->enemy_4_height);
 
 }
 

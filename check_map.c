@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 08:55:27 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/24 16:25:14 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/24 18:36:03 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	check_quant(char **map, t_mapcheck *data)
 	{
     	while(map[i][j] != '\0')
 		{
-			if(map[i][j] != '1' && map[i][j] != 'P' && map[i][j] != 'E' && map[i][j] != 'C' && map[i][j] != '0')
+			if(map[i][j] != '1' && map[i][j] != 'P' && map[i][j] != 'E' && map[i][j] != 'C' && map[i][j] != '0' && map[i][j] != 'I')
 				return (1);
 			if(map[i][j] == 'C')
 				data->collectibles++;

@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:18:25 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/24 16:35:39 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/24 20:23:02 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,15 @@ int		check_move(t_windows *windows, char c)
 	if (c == 'E')
 		return (1);
 	if (c == 'S')
+	{
+		ft_printf("CONGRATULATIONS!!! YOU MADE IT TO THE EXIT!\n");
 		end_game(windows);
+	}
+	if (c == 'I' || c == 'L')
+	{
+		ft_printf("YOU GOT HIT BY AN ENEMY! GAME OVER!\n");
+		end_game(windows);
+	}
 	windows->moves += 1;
 	return (0);
 }

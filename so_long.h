@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:39:10 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/24 17:31:10 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/24 20:15:19 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include "libft/libft.h"
+#include<time.h>
 
 #define WALL_PATH "./assets/wall.xpm"
 #define	FLOOR_PATH "./assets/floor.xpm"
@@ -29,6 +30,10 @@
 #define IDLE_2 "./assets/idle_2.xpm"
 #define IDLE_3 "./assets/idle_3.xpm"
 #define IDLE_4 "./assets/idle_4.xpm"
+#define ENEMY_1 "./assets/enemy_1.xpm"
+#define ENEMY_2 "./assets/enemy_2.xpm"
+#define ENEMY_3 "./assets/enemy_3.xpm"
+#define ENEMY_4 "./assets/enemy_4.xpm"
 
 typedef struct s_coordinates
 {
@@ -62,6 +67,7 @@ typedef struct s_windows
 	int			collected;
 	int			nbr_collectibles;
 	int			moves;
+	char		**render_array;
 	void		*floor;
 	int			floor_width;
 	int			floor_height;
@@ -89,7 +95,19 @@ typedef struct s_windows
 	void		*idle_4;
 	int			idle_4_height;
 	int			idle_4_width;
-	char		**render_array;
+	void		*enemy_1;
+	int			enemy_1_height;
+	int			enemy_1_width;
+	void		*enemy_2;
+	int			enemy_2_height;
+	int			enemy_2_width;
+	void		*enemy_3;
+	int			enemy_3_height;
+	int			enemy_3_width;
+	void		*enemy_4;
+	int			enemy_4_height;
+	int			enemy_4_width;
+
 }	t_windows;
 
 int				get_height(char *file);
@@ -114,3 +132,7 @@ void			change_array(t_windows *windows, int x, int y, char chr);
 int				check_move(t_windows *windows, char c);
 char			*put_text(char *text, int nbr);
 void			end_game(t_windows *windows);
+void			enemy_animation(t_windows *windows, int x, int i, int j);
+int				check_enemy_move(t_windows *windows, char c);
+void 			change_enemies(t_windows *windows, char one, char two);
+int    			random_generator(void);

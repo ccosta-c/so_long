@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 17:14:21 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/24 17:31:18 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/24 20:23:17 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	handle_render(int keysym, t_windows *windows)
 	}
 	if (keysym == XK_Escape)
 	{
+		ft_printf("GAME CLOSED BY PRESSING ESCAPE!\n");
 		end_game(windows);
 	}	
 	return (0);
