@@ -6,11 +6,39 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:18:25 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/23 20:47:45 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/24 16:35:39 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int		check_move(t_windows *windows, char c)
+{
+	if (c == '1')
+		return (1);
+	if (c == 'C')
+	{
+		windows->collected += 1;
+		if (windows->nbr_collectibles == windows->collected)
+			windows->render_array[windows->y_exit][windows->x_exit] = 'S';
+	}
+	if (c == 'E')
+		return (1);
+	if (c == 'S')
+		end_game(windows);
+	windows->moves += 1;
+	return (0);
+}
+
+char	*put_text(char *text, int nbr)
+{
+	char	*nbr_str;
+	char	*str;
+
+	nbr_str = ft_itoa(nbr);
+	str = ft_strjoin(text, nbr_str);
+	return (str);
+}
 
 void	player_animation(t_windows *windows, int x, int i, int j)
 {

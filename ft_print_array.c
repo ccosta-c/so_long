@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:46:13 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/15 17:10:30 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/24 18:05:14 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_print_array (char **array)
   {
     while(array[i][j] != '\0')
 	  {
-      printf("%c ", array[i][j]);
+      printf("%c", array[i][j]);
 	    j++;
     }
     i++;

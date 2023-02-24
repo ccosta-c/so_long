@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:39:10 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/23 18:40:56 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/24 17:31:10 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #define	FLOOR_PATH "./assets/floor.xpm"
 #define COLECTIBLE_PATH "./assets/collectible.xpm"
 #define DOOR_CLOSED_PATH "./assets/door_closed.xpm"
+#define DOOR_OPEN_PATH "./assets/door_open.xpm"
 #define IDLE_1 "./assets/idle_1.xpm"
 #define IDLE_2 "./assets/idle_2.xpm"
 #define IDLE_3 "./assets/idle_3.xpm"
@@ -44,6 +45,8 @@ typedef struct s_mapcheck
 	int found_exit;
 	int collectibles_found;
 	int players;
+	int	exit_x;
+	int	exit_y;
 }	t_mapcheck;
 
 typedef struct s_windows
@@ -54,6 +57,11 @@ typedef struct s_windows
 	int			y_player;
 	int			x_size;
 	int			y_size;
+	int			x_exit;
+	int			y_exit;
+	int			collected;
+	int			nbr_collectibles;
+	int			moves;
 	void		*floor;
 	int			floor_width;
 	int			floor_height;
@@ -66,6 +74,9 @@ typedef struct s_windows
 	void		*door_closed;
 	int			dc_width;
 	int			dc_height;
+	void		*door_open;
+	int			do_width;
+	int			do_height;
 	void		*idle_1;
 	int			idle_1_height;
 	int			idle_1_width;
@@ -79,25 +90,7 @@ typedef struct s_windows
 	int			idle_4_height;
 	int			idle_4_width;
 	char		**render_array;
-	t_mapcheck 	*map_data;
 }	t_windows;
-
-
-typedef struct s_xpm
-{
-	void	*xpm_ptr;
-	int		width;
-	int		height;
-}	t_xpm;
-
-typedef struct s_texture
-{
-	t_xpm	tile;
-	t_xpm	floor;
-	t_xpm	coins;
-	t_xpm	exit;
-	t_xpm	player;
-}	t_texture;
 
 int				get_height(char *file);
 int 			get_width(char *file);
@@ -113,8 +106,11 @@ int				check_line(char **map, int x, int y, t_windows windows);
 int				check_row(char **map, int x, int y, t_windows windows);
 void			free_array(char **array, int y);
 int				draw_map(t_windows *windows);
-int				handle_keypress(int keysym, t_windows *data);
+int				handle_render(int keysym, t_windows *data);
 int				handle_no_event(void *data);
 void			initialize(t_windows *windows);
 void			player_animation(t_windows *windows, int x, int i, int j);
 void			change_array(t_windows *windows, int x, int y, char chr);
+int				check_move(t_windows *windows, char c);
+char			*put_text(char *text, int nbr);
+void			end_game(t_windows *windows);

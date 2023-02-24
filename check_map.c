@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 08:55:27 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/23 15:45:22 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/24 16:25:14 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,11 @@ int	check_quant(char **map, t_mapcheck *data)
 				data->players++;
 			}
 			if (map[i][j] == 'E')
+			{
 				data->exits++;
+				data->exit_x = j;
+				data->exit_y = i;
+			}
 			j++;
 		}
     	i++;

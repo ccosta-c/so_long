@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:42:56 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/23 20:47:49 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/24 16:06:21 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int		draw_map(t_windows *windows)
 				mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->collectible, (j * 64), (i * 64));
 			if(windows->render_array[i][j] == 'E')
 				mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->door_closed, (j * 64), (i * 64));
+			if(windows->render_array[i][j] == 'S')
+				mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->door_open, (j * 64), (i * 64));
 			if(windows->render_array[i][j] == 'P')
 			{
 				player_animation(windows, p, i, j);
@@ -43,8 +45,8 @@ int		draw_map(t_windows *windows)
     	i++;
     	j = 0;
 	}
-	
-	mlx_string_put(windows->mlx_ptr, windows->win_ptr, 16, 32, 0xFFFFFF, ft_itoa(p));
+	mlx_string_put(windows->mlx_ptr, windows->win_ptr, 10, 32, 0xFFFFFF, put_text("Collectibles Collected: ", windows->collected));
+	mlx_string_put(windows->mlx_ptr, windows->win_ptr, 10, 20, 0xFFFFFF, put_text("Moves: ", windows->moves));
 	p++;
 	return(0);
 }

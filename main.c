@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:38:55 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/23 18:53:05 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/24 17:36:02 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,30 @@ void	initialize(t_windows *windows)
 	windows->floor = mlx_xpm_file_to_image(windows->mlx_ptr, FLOOR_PATH, &windows->floor_width, &windows->floor_height);
 	windows->collectible = mlx_xpm_file_to_image(windows->mlx_ptr, COLECTIBLE_PATH, &windows->collectible_width, &windows->collectible_height);
 	windows->door_closed = mlx_xpm_file_to_image(windows->mlx_ptr, DOOR_CLOSED_PATH, &windows->dc_width, &windows->dc_height);
+	windows->door_open = mlx_xpm_file_to_image(windows->mlx_ptr, DOOR_OPEN_PATH, &windows->do_width, &windows->do_height);
 	windows->idle_1 = mlx_xpm_file_to_image(windows->mlx_ptr, IDLE_1, &windows->idle_1_width, &windows->idle_1_height);
 	windows->idle_2 = mlx_xpm_file_to_image(windows->mlx_ptr, IDLE_2, &windows->idle_2_width, &windows->idle_2_height);
 	windows->idle_3 = mlx_xpm_file_to_image(windows->mlx_ptr, IDLE_3, &windows->idle_3_width, &windows->idle_3_height);
 	windows->idle_4 = mlx_xpm_file_to_image(windows->mlx_ptr, IDLE_4, &windows->idle_4_width, &windows->idle_4_height);
+
+}
+
+void	end_game(t_windows *windows)
+{	
+	mlx_destroy_image(windows->mlx_ptr, windows->wall);
+	mlx_destroy_image(windows->mlx_ptr, windows->floor);
+	mlx_destroy_image(windows->mlx_ptr, windows->collectible);
+	mlx_destroy_image(windows->mlx_ptr, windows->door_closed);
+	mlx_destroy_image(windows->mlx_ptr, windows->door_open);	
+	mlx_destroy_image(windows->mlx_ptr, windows->idle_1);
+	mlx_destroy_image(windows->mlx_ptr, windows->idle_2);
+	mlx_destroy_image(windows->mlx_ptr, windows->idle_3);
+	mlx_destroy_image(windows->mlx_ptr, windows->idle_4);
+	mlx_destroy_window(windows->mlx_ptr, windows->win_ptr);
+	mlx_destroy_display(windows->mlx_ptr);
+	free_array(windows->render_array, windows->y_size);
+	free(windows->mlx_ptr);
+	exit(0);
 }
 
 int	main(int argc, char **argv)
@@ -46,9 +66,13 @@ int	main(int argc, char **argv)
 		return (0);
 	windows.x_player = map_data.x;
 	windows.y_player = map_data.y;
+	windows.x_exit = map_data.exit_x;
+	windows.y_exit = map_data.exit_y;
+	windows.nbr_collectibles = map_data.collectibles;
+	windows.collected = 0;
+	windows.moves = 0;
 	free_array(map_array, windows.y_size);
 	windows.render_array = convert_map_to_array(windows, argv[1]);
 	draw_windows(&windows);
-	free_array(windows.render_array, windows.y_size);
 	return(0);
 }
