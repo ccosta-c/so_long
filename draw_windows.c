@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 17:14:21 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/24 20:23:17 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/24 20:36:05 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	draw_windows(t_windows *windows)
 		return (1);
 	}
 	initialize(windows);
+	initialize_sprites(windows);
 	mlx_hook(windows->win_ptr, KeyPress, KeyPressMask, &handle_render, windows);
 	mlx_loop_hook(windows->mlx_ptr, &draw_map, windows);
 	mlx_loop(windows->mlx_ptr);

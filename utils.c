@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:18:25 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/24 20:23:02 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/02/27 18:00:16 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ char	*put_text(char *text, int nbr)
 	return (str);
 }
 
-void	player_animation(t_windows *windows, int x, int i, int j)
+void	player_animation(t_windows *windows, int i, int j)
 {
+	static int	x;	
+	
 	if (x == 0)
 		mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->idle_1, (j * 64), (i * 64));
 	if (x == 100)
@@ -58,11 +60,14 @@ void	player_animation(t_windows *windows, int x, int i, int j)
 		mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->idle_3, (j * 64), (i * 64));
 	if (x == 300)
 		mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->idle_4, (j * 64), (i * 64));
+	if (x == 300)
+		x = 0;
+	x++;
 }
 
-int	check_line(char **map, int x, int y, t_windows windows)
+int	check_line(char **map, int x, int y, t_windows *windows)
 {
-	while(x < windows.x_size)
+	while(x < windows->x_size)
 	{
 		if (map[y][x] != '1')
 			return(1);
@@ -71,9 +76,9 @@ int	check_line(char **map, int x, int y, t_windows windows)
 	return (0);
 }
 
-int	check_row(char **map, int x, int y, t_windows windows)
+int	check_row(char **map, int x, int y, t_windows *windows)
 {
-	while(y < windows.y_size)
+	while(y < windows->y_size)
 	{
 		if (map[y][x] != '1')
 			return(1);
