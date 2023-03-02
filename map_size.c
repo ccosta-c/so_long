@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:16:44 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/27 19:12:15 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/03/01 11:43:48 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,43 +20,37 @@ int	get_height(char *file)
 
 	fd = open(file, O_RDONLY);
 	i = 0;
-	line = "start";
-	while (line)
+	while (1)
 	{
 		line = get_next_line(fd);
-		if (line != NULL)
-			i++;
+		if (!line)
+			break ;
+		free(line);
+		i++;
 	}
+	free(line);
 	close(fd);
 	return(i);
 }
 
-int get_width(char *file)
+int	get_width(t_windows *windows)
 {
-	char	*line;
-	int 	reference;
-	int		i;
-	int		fd;
+	int	reference;
+	int	j;
+	int	i;
 
-	i = 0;
 	reference = 0;
-	line = "start";
-	fd = open(file, O_RDONLY);
-	while (line)
+	j = -1;
+	i= 0;
+	while (j++ < windows->y_size)
 	{
-		line = get_next_line(fd);
-		if (!line)
-			return(i);
-		if (reference == 0)
-			reference = ft_strlenwithoutn(line);
-		i = ft_strlenwithoutn(line);
-		if (i != reference)
-		{
-			close(fd);
-			return (1);
-		}
+		while ((windows->render_array[j][i]) != '\0')
+			i++;
+		if(reference == 0)
+			reference = i;
+		if (reference != i)
+			return (1);	
 	}
-	close(fd);
 	return (i);
 }
 
@@ -76,7 +70,7 @@ int		check_borders(char **map, t_windows *windows)
 int	get_map_size(t_windows *windows, char *file)
 {
 	windows->y_size = get_height(file);
-	windows->x_size = get_width(file);
+	windows->x_size = get_width(windows);
 	if (windows->x_size == 0)
 	{
 		ft_printf("Lines width is not equal to all of the lines.\n");
@@ -87,3 +81,34 @@ int	get_map_size(t_windows *windows, char *file)
 	ft_printf("--------------------------\n");
 	return (0);
 }
+
+/*int get_width(char *file)
+{
+	char	*line;
+	int 	reference;
+	int		i;
+	int		fd;
+
+	i = 0;
+	reference = 0;
+	fd = open(file, O_RDONLY);
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		if (reference == 0)
+			reference = ft_strlenwithoutn(line);
+		i = ft_strlenwithoutn(line);
+		if (i != reference)
+		{
+			close(fd);
+			return (1);
+		}
+		free (line);
+	}
+	free (line);
+	close(fd);
+	return (i);
+}
+*/

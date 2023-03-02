@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:39:10 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/27 18:35:37 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/03/01 11:50:16 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,51 +60,30 @@ typedef struct s_windows
 	int			moves;
 	char		**render_array;
 	void		*floor;
-	int			floor_width;
-	int			floor_height;
+	int			image_width;
+	int			image_height;
+	char		*str_moves;
+	char		*str_collectibles;
 	void		*wall;
-	int			wall_width;
-	int			wall_height;
 	void		*collectible;
-	int			collectible_width;
-	int			collectible_height;
 	void		*door_closed;
-	int			dc_width;
-	int			dc_height;
 	void		*door_open;
-	int			do_width;
-	int			do_height;
 	void		*idle_1;
-	int			idle_1_height;
-	int			idle_1_width;
 	void		*idle_2;
-	int			idle_2_height;
-	int			idle_2_width;
 	void		*idle_3;
-	int			idle_3_height;
-	int			idle_3_width;
 	void		*idle_4;
-	int			idle_4_height;
-	int			idle_4_width;
 	void		*enemy_1;
-	int			enemy_1_height;
-	int			enemy_1_width;
 	void		*enemy_2;
-	int			enemy_2_height;
-	int			enemy_2_width;
 	void		*enemy_3;
-	int			enemy_3_height;
-	int			enemy_3_width;
 	void		*enemy_4;
-	int			enemy_4_height;
-	int			enemy_4_width;
 
 }	t_windows;
 
 int				get_height(char *file);
-int 			get_width(char *file);
+int				get_width(t_windows *windows);
+//int 			get_width(char *file);
 int				get_map_size(t_windows *windows, char *file);
-char			**convert_map_to_array(t_windows windows, char *file);
+int				convert_map_to_array(t_windows *windows, char *file);
 void			ft_print_array (char **array);
 int				check_map_info(char **map, t_windows *windows);
 int				map_checker(char **map, t_windows *windows);

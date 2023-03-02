@@ -6,7 +6,7 @@
 #    By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 09:58:27 by ccosta-c          #+#    #+#              #
-#    Updated: 2023/02/24 18:19:03 by ccosta-c         ###   ########.fr        #
+#    Updated: 2023/03/01 11:32:39 by ccosta-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ LIBFT		= libft
 LIBX 		= mlx
 
 #_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_ FILES _/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_
-SRC				= check_map.c ft_print_array.c get_map.c map_size.c utils.c draw_windows.c free_array.c draw_map.c handle_events.c enemies.c
+SRC				= check_map.c ft_print_array.c get_map.c map_size.c utils.c draw_windows.c free_array.c draw_map.c enemies.c
 OBJS 			:= $(SRC:.c=.o)
 OBJS_BONUS		= 
 NAME			= so_long

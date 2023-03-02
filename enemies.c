@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:18:56 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/27 18:48:14 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/03/01 12:21:35 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void enemy_trigger(t_windows *windows)
 {
     static int e;
     
-    if(e == 300)
+    if(e == 200)
 		change_enemies(windows, 'I', 'L');
-	if(e == 600)
+	if(e == 400)
 	{
 		change_enemies(windows, 'L', 'I');
 		e = 0;
