@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:39:10 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/03/01 11:50:16 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/03/02 17:11:26 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,11 @@ int				check_move(t_windows *windows, char c);
 char			*put_text(char *text, int nbr);
 void			end_game(t_windows *windows);
 void			enemy_animation(t_windows *windows, int i, int j);
-int				check_enemy_move(t_windows *windows, char c);
+int				check_enemy_move(char c);
 void 			change_enemies(t_windows *windows, char one, char two);
 int    			random_generator(void);
 void 			enemy_trigger(t_windows *windows);
 void   			enemy_movement(t_windows *windows, int y, int x, char two);
 void    		enemy_movement_y(t_windows *windows, int y, int x, char two, int rand);
 void   			enemy_movement_x(t_windows *windows, int y, int x, char two, int rand);
+int				changes(t_windows *windows);

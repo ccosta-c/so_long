@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:18:56 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/03/01 12:21:35 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/03/02 17:12:15 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,10 @@ void enemy_trigger(t_windows *windows)
 {
     static int e;
     
-    if(e == 200)
+    if(e % 2 == 0)
 		change_enemies(windows, 'I', 'L');
-	if(e == 400)
-	{
+	if(e % 2 != 0)
 		change_enemies(windows, 'L', 'I');
-		e = 0;
-	}
     e++;
 }
 
@@ -30,15 +27,15 @@ void	enemy_animation(t_windows *windows, int i, int j)
 {
 	static int  x;
     
-    if (x == 0)
+    if (x < 100)
 		mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->enemy_1, (j * 64), (i * 64));
-	if (x == 100)
+	if (x >= 100 && x < 200 )
 		mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->enemy_2, (j * 64), (i * 64));
-	if (x == 200)
+	if (x >= 200 && x < 300 )
 		mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->enemy_3, (j * 64), (i * 64));
-	if (x == 300)
+	if (x >= 300 && x < 400 )
 		mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->enemy_4, (j * 64), (i * 64));
-    if (x == 300)
+    if (x == 400)
 		x = 0;
     x++;
 }
@@ -59,10 +56,10 @@ void change_enemies(t_windows *windows, char one, char two)
     int y;
     int rand;
     
-    y = 0;
+    y = -1;
     while(++y < windows->y_size) 
     {
-        x = 0;
+        x = -1;
         while(++x < windows->x_size)
         {
             if(windows->render_array[y][x] == one)
@@ -81,17 +78,12 @@ void change_enemies(t_windows *windows, char one, char two)
     }
 }
 
-int		check_enemy_move(t_windows *windows, char c)
+int		check_enemy_move(char c)
 {
 	if (c == '1' || c == 'C' || c == 'E' || c == 'S')
 		return (0);
     if (c == 'I' || c == 'L')
 		return (0);
-    if (c == 'P')
-    {
-        ft_printf("AN ENEMY HIT YOU! GAME OVER!\n");
-        end_game(windows);
-    }
     return (1);
 }
 
@@ -99,18 +91,22 @@ void    enemy_movement_y(t_windows *windows, int y, int x, char two, int rand)
 {
     if (rand == 1)
     {
-        if(check_enemy_move(windows, windows->render_array[y - 1][x]))
+        if(check_enemy_move(windows->render_array[y - 1][x]))
         {
             windows->render_array[y][x] = '0';
+            mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->floor, (x * 64), (y * 64));
             windows->render_array[y - 1][x] = two;
+            enemy_animation(windows, y - 1, x);
         }
     }
      if (rand == 2)
     {
-        if(check_enemy_move(windows, windows->render_array[y + 1][x]))
+        if(check_enemy_move(windows->render_array[y + 1][x]))
         {
             windows->render_array[y][x] = '0';
+            mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->floor, (x * 64), (y * 64));
             windows->render_array[y + 1][x] = two;
+            enemy_animation(windows, y + 1, x);
         }
     }
 }
@@ -119,18 +115,22 @@ void    enemy_movement_x(t_windows *windows, int y, int x, char two, int rand)
 {
     if (rand == 3)
     {
-        if(check_enemy_move(windows, windows->render_array[y][x - 1]))
+        if(check_enemy_move(windows->render_array[y][x - 1]))
         {
             windows->render_array[y][x] = '0';
+            mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->floor, (x * 64), (y * 64));
             windows->render_array[y][x - 1] = two;
+            enemy_animation(windows, y, x - 1);
         }
     }
      if (rand == 4)
     {
-        if(check_enemy_move(windows, windows->render_array[y][x + 1]))
+        if(check_enemy_move(windows->render_array[y][x + 1]))
         {
             windows->render_array[y][x] = '0';
+            mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->floor, (x * 64), (y * 64));
             windows->render_array[y][x + 1] = two;
+            enemy_animation(windows, y, x + 1);
         }
     }
 }

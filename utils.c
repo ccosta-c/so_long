@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:18:25 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/02/27 18:00:16 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/03/02 17:09:30 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		check_move(t_windows *windows, char c)
 {
 	if (c == '1')
-		return (1);
+		return (0);
 	if (c == 'C')
 	{
 		windows->collected += 1;
@@ -23,7 +23,7 @@ int		check_move(t_windows *windows, char c)
 			windows->render_array[windows->y_exit][windows->x_exit] = 'S';
 	}
 	if (c == 'E')
-		return (1);
+		return (0);
 	if (c == 'S')
 	{
 		ft_printf("CONGRATULATIONS!!! YOU MADE IT TO THE EXIT!\n");
@@ -35,7 +35,7 @@ int		check_move(t_windows *windows, char c)
 		end_game(windows);
 	}
 	windows->moves += 1;
-	return (0);
+	return (1);
 }
 
 char	*put_text(char *text, int nbr)
