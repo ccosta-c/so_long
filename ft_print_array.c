@@ -12,22 +12,22 @@
 
 #include "so_long.h"
 
-void	ft_print_array (char **array)
+void	ft_print_array(t_windows *windows, char **array)
 {
   int	i;
   int	j;
 
   i = 0;
   j = 0;
-  while(array[i][j] != '\0') 
+  while(i < windows->y_size) 
   {
-    while(array[i][j] != '\0')
+    while(array && array[i][j] != '\0')
 	  {
-      printf("%c", array[i][j]);
+      ft_printf("%c", array[i][j]);
 	    j++;
     }
     i++;
     j = 0;
-	printf("\n");
+	  ft_printf("\n");
   }
 }

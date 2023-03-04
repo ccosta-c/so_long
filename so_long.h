@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:39:10 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/03/02 17:11:26 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/03/03 12:24:09 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,15 @@ typedef struct s_windows
 	int			found_exit;
 	int			players;
 	int			moves;
+	int			rand;
 	char		**render_array;
 	void		*floor;
 	int			image_width;
 	int			image_height;
 	char		*str_moves;
 	char		*str_collectibles;
+	char		*str_total_collectibles;
+	char		*str_join_collectibles;
 	void		*wall;
 	void		*collectible;
 	void		*door_closed;
@@ -76,15 +79,13 @@ typedef struct s_windows
 	void		*enemy_2;
 	void		*enemy_3;
 	void		*enemy_4;
-
 }	t_windows;
 
 int				get_height(char *file);
 int				get_width(t_windows *windows);
-//int 			get_width(char *file);
 int				get_map_size(t_windows *windows, char *file);
 int				convert_map_to_array(t_windows *windows, char *file);
-void			ft_print_array (char **array);
+void			ft_print_array(t_windows *windows, char **array);
 int				check_map_info(char **map, t_windows *windows);
 int				map_checker(char **map, t_windows *windows);
 int				check_quant(char **map, t_windows *window);
@@ -104,12 +105,14 @@ void			change_array(t_windows *windows, int x, int y, char chr);
 int				check_move(t_windows *windows, char c);
 char			*put_text(char *text, int nbr);
 void			end_game(t_windows *windows);
-void			enemy_animation(t_windows *windows, int i, int j);
-int				check_enemy_move(char c);
+void			enemy_animation(t_windows *windows);
+int				check_enemy_move(t_windows *windows, char c);
 void 			change_enemies(t_windows *windows, char one, char two);
-int    			random_generator(void);
+void    		random_generator(t_windows *windows);
 void 			enemy_trigger(t_windows *windows);
 void   			enemy_movement(t_windows *windows, int y, int x, char two);
-void    		enemy_movement_y(t_windows *windows, int y, int x, char two, int rand);
-void   			enemy_movement_x(t_windows *windows, int y, int x, char two, int rand);
+void    		enemy_movement_y(t_windows *windows, int y, int x, char two);
+void   			enemy_movement_x(t_windows *windows, int y, int x, char two);
 int				changes(t_windows *windows);
+void			render_wall(t_windows *windows);
+void 			text_to_screen(t_windows *windows);

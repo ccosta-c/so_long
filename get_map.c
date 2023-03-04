@@ -15,35 +15,37 @@
 int	convert_map_to_array(t_windows *windows, char *file)
 {
 	int				fd;
-	char			*line;
+	char			*lines;
 	t_coordinates	xandy;
 	
+	windows->render_array = (char **)malloc((windows->y_size) * sizeof(char*));
+	if (!(windows->render_array))
+		return (1);
 	fd = open(file, O_RDONLY);
-	line = "start";
-	xandy.x = 0;
 	xandy.y = 0;
-	while (line)
+	while (1)
 	{
-		line = get_next_line(fd);
-		if (line)
-			windows->render_array[xandy.y] = (char *)malloc((windows->x_size + 1) * sizeof(char));
-		while (line && line[xandy.x] != '\0' && line[xandy.x] != '\n')
+		lines = get_next_line(fd);
+		xandy.x = 0;
+		if (!lines)
+			break ;
+		windows->render_array[xandy.y] = (char *)malloc((ft_strlenwithoutn(lines) + 1) * sizeof(char));
+		if(!(windows->render_array[xandy.y]))
 		{
-			windows->render_array[xandy.y][xandy.x] = line[xandy.x];
+			close(fd);
+			free(lines);
+			return(1);
+		}
+		while (lines && lines[xandy.x] != '\0' && lines[xandy.x] != '\n')
+		{
+			windows->render_array[xandy.y][xandy.x] = lines[xandy.x];
 			xandy.x++;
 		}
-		if (line)
-		{
-			windows->render_array[xandy.y][xandy.x] = '\0';
-			xandy.y++;
-			xandy.x = 0;
-		}
+		windows->render_array[xandy.y][xandy.x] = '\0';
+		xandy.y++;
+		free(lines);
 	}
-	windows->render_array[xandy.y] = (char *)malloc(1 * sizeof(char));
-	windows->render_array[xandy.y][0] = '\0';
 	close(fd);
-	free(line);
+	free(lines);
 	return (0);
 }
-
-//DAR FREE AO LINE

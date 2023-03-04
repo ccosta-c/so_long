@@ -28,7 +28,6 @@ int	get_height(char *file)
 		free(line);
 		i++;
 	}
-	free(line);
 	close(fd);
 	return(i);
 }
@@ -40,16 +39,16 @@ int	get_width(t_windows *windows)
 	int	i;
 
 	reference = 0;
-	j = -1;
+	j = 0;
 	i= 0;
-	while (j++ < windows->y_size)
+	while (j < windows->y_size)
 	{
-		while ((windows->render_array[j][i]) != '\0')
-			i++;
-		if(reference == 0)
+		i = ft_strlenwithoutn(windows->render_array[j]);
+		if (reference == 0)
 			reference = i;
 		if (reference != i)
-			return (1);	
+			return (1);
+		j++;
 	}
 	return (i);
 }
@@ -70,6 +69,7 @@ int		check_borders(char **map, t_windows *windows)
 int	get_map_size(t_windows *windows, char *file)
 {
 	windows->y_size = get_height(file);
+	convert_map_to_array(windows, file);
 	windows->x_size = get_width(windows);
 	if (windows->x_size == 0)
 	{

@@ -62,7 +62,7 @@ int	check_quant(char **map, t_windows *windows)
 
 	i = 0;
   	j = 0;
-	while(map[i][j] != '\0') 
+	while(i < windows->y_size) 
 	{
     	while(map[i][j] != '\0')
 		{

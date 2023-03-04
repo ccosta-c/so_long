@@ -6,11 +6,18 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 11:18:25 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/03/02 17:09:30 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/03/03 12:18:21 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	render_wall(t_windows *windows)
+{
+	mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->wall, (0 * 64), (0 * 64));
+	mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->wall, (1 * 64), (0 * 64));
+	mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->wall, (2 * 64), (0 * 64));
+}
 
 int		check_move(t_windows *windows, char c)
 {
@@ -20,7 +27,11 @@ int		check_move(t_windows *windows, char c)
 	{
 		windows->collected += 1;
 		if (windows->nbr_collectibles == windows->collected)
+		{
+			mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->door_open, (windows->x_exit * 64), (windows->y_exit * 64));
 			windows->render_array[windows->y_exit][windows->x_exit] = 'S';
+		}
+		
 	}
 	if (c == 'E')
 		return (0);
@@ -45,6 +56,7 @@ char	*put_text(char *text, int nbr)
 
 	nbr_str = ft_itoa(nbr);
 	str = ft_strjoin(text, nbr_str);
+	free(nbr_str);
 	return (str);
 }
 
@@ -54,13 +66,13 @@ void	player_animation(t_windows *windows, int i, int j)
 	
 	if (x == 0)
 		mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->idle_1, (j * 64), (i * 64));
-	if (x == 100)
+	if (x == 1000)
 		mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->idle_2, (j * 64), (i * 64));
-	if (x == 200)
+	if (x == 2000)
 		mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->idle_3, (j * 64), (i * 64));
-	if (x == 300)
+	if (x == 3000)
 		mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->idle_4, (j * 64), (i * 64));
-	if (x == 300)
+	if (x == 3000)
 		x = 0;
 	x++;
 }

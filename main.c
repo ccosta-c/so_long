@@ -78,12 +78,10 @@ int	main(int argc, char **argv)
 		ft_printf("Please specify the map.\n");
 		return(1);
 	}
-	windows.render_array = (char **)malloc((windows.y_size + 1) * sizeof(char*));
-	convert_map_to_array(&windows, argv[1]);
 	if (get_map_size(&windows, argv[1]))
 		return (1);
 	ft_printf("The 2D Map Array Generated\n");
-	ft_print_array(windows.render_array);
+	ft_print_array(&windows, windows.render_array);
 	ft_printf("--------------------------\n");
 	if (check_map_info(windows.render_array, &windows))
 		return (1);
@@ -92,7 +90,6 @@ int	main(int argc, char **argv)
 	windows.collected = 0;
 	windows.moves = 0;
 	free_array(windows.render_array, windows.y_size);
-	windows.render_array = (char **)malloc((windows.y_size + 1) * sizeof(char*));
 	convert_map_to_array(&windows, argv[1]);
 	draw_windows(&windows);
 	return(0);
