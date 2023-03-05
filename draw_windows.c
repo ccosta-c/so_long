@@ -12,79 +12,101 @@
 
 #include "so_long.h"
 
-int	handle_render(int keysym, t_windows *windows)
+int	handle_render(int keysym, t_windows *stu)
 {
-	if (keysym == XK_w && (check_move(windows, windows->render_array[windows->y_player - 1][windows->x_player])))
-	{	
-			mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->floor, (windows->x_player * 64), (windows->y_player * 64));
-			windows->render_array[windows->y_player][windows->x_player] = '0';
-			windows->y_player -= 1;
-			windows->render_array[windows->y_player][windows->x_player] = 'P';
-			return (0);
-	}
-	if (keysym == XK_s && (check_move(windows, windows->render_array[windows->y_player + 1][windows->x_player])))
-	{	
-			mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->floor, (windows->x_player * 64), (windows->y_player * 64));
-			windows->render_array[windows->y_player][windows->x_player] = '0';
-			windows->y_player += 1;
-			windows->render_array[windows->y_player][windows->x_player] = 'P';
-			return (0);
-	}
-	if (keysym == XK_a && (check_move(windows, windows->render_array[windows->y_player][windows->x_player - 1])))
-	{	
-			mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->floor, (windows->x_player * 64), (windows->y_player * 64));
-			windows->render_array[windows->y_player][windows->x_player] = '0';
-			windows->x_player -= 1;
-			windows->render_array[windows->y_player][windows->x_player] = 'P';
-			return (0);
-	}
-	if (keysym == XK_d && (check_move(windows, windows->render_array[windows->y_player][windows->x_player + 1])))
-	{	
-			mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->floor, (windows->x_player * 64), (windows->y_player * 64));
-			windows->render_array[windows->y_player][windows->x_player] = '0';
-			windows->x_player += 1;
-			windows->render_array[windows->y_player][windows->x_player] = 'P';
-			return (0);
-	}
+	if (keysym == XK_w || keysym == XK_s)
+		handle_render_y(stu, keysym);
+	if (keysym == XK_a || keysym == XK_d)
+		handle_render_x(stu, keysym);
 	if (keysym == XK_Escape)
 	{
 		ft_printf("GAME CLOSED BY PRESSING ESCAPE!\n");
-		end_game(windows);
+		end_game(stu);
 	}	
 	return (0);
 }
 
-int	draw_windows(t_windows *windows)
+int	draw_windows(t_windows *stu)
 {	
-	windows->mlx_ptr = mlx_init();
-	if (windows->mlx_ptr == NULL)
+	stu->mlx_ptr = mlx_init();
+	if (stu->mlx_ptr == NULL)
 		return (1);
-	windows->win_ptr = mlx_new_window(windows->mlx_ptr, (windows->x_size * 64), 
-		(windows->y_size * 64), "so_long");
-	if (windows->win_ptr == NULL)
+	stu->win_ptr = mlx_new_window(stu->mlx_ptr, (stu->x_size * 64),
+			(stu->y_size * 64), "so_long");
+	if (stu->win_ptr == NULL)
 	{
-		free(windows->win_ptr);
+		free(stu->win_ptr);
 		return (1);
 	}
-	initialize(windows);
-	initialize_sprites(windows);
-	draw_map(windows);
-	mlx_hook(windows->win_ptr, KeyPress, KeyPressMask, &handle_render, windows);
-	mlx_loop_hook(windows->mlx_ptr, &changes, windows);
-	mlx_loop(windows->mlx_ptr);
-	return(0);
+	initialize(stu);
+	initialize_sprites(stu);
+	draw_map(stu);
+	mlx_hook(stu->win_ptr, KeyPress, KeyPressMask, &handle_render, stu);
+	mlx_hook(stu->win_ptr, DestroyNotify, StructureNotifyMask, &end_game, stu);
+	mlx_loop_hook(stu->mlx_ptr, &changes, stu);
+	mlx_loop(stu->mlx_ptr);
+	return (0);
 }
 
-void text_to_screen(t_windows *windows)
+void	text_to_screen(t_windows *stu)
 {
-	windows->str_collectibles = put_text("Collectibles Collected: ", windows->collected);
-	windows->str_total_collectibles = put_text("/", windows->nbr_collectibles);
-	windows->str_join_collectibles = ft_strjoin(windows->str_collectibles, windows->str_total_collectibles);
-	mlx_string_put(windows->mlx_ptr, windows->win_ptr, 10, 32, 0xFFFFFF, windows->str_join_collectibles);
-	windows->str_moves = put_text("Moves: ", windows->moves);
-	mlx_string_put(windows->mlx_ptr, windows->win_ptr, 10, 20, 0xFFFFFF, windows->str_moves);
-	free(windows->str_total_collectibles);
-	free(windows->str_join_collectibles);
-	free(windows->str_collectibles);
-	free(windows->str_moves);
+	stu->str_collectibles = put_text("Collectibles Collected: ",
+			stu->collected);
+	stu->str_total_collectibles = put_text("/",
+			stu->nbr_collectibles);
+	stu->str_join_collectibles = ft_strjoin(stu->str_collectibles,
+			stu->str_total_collectibles);
+	mlx_string_put(stu->mlx_ptr, stu->win_ptr, 10, 32, 0xFFFFFF,
+		stu->str_join_collectibles);
+	stu->str_moves = put_text("Moves: ", stu->moves);
+	mlx_string_put(stu->mlx_ptr, stu->win_ptr, 10, 20, 0xFFFFFF,
+		stu->str_moves);
+	free(stu->str_total_collectibles);
+	free(stu->str_join_collectibles);
+	free(stu->str_collectibles);
+	free(stu->str_moves);
+}
+
+void	handle_render_y(t_windows *stu, int keysym)
+{
+	if (keysym == XK_w && (check_move(stu,
+				stu->render_array[stu->y_player - 1][stu->x_player])))
+	{	
+		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr, stu->floor,
+			(stu->x_player * 64), (stu->y_player * 64));
+		stu->render_array[stu->y_player][stu->x_player] = '0';
+		stu->y_player -= 1;
+		stu->render_array[stu->y_player][stu->x_player] = 'P';
+	}
+	if (keysym == XK_s && (check_move(stu,
+				stu->render_array[stu->y_player + 1][stu->x_player])))
+	{	
+		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr, stu->floor,
+			(stu->x_player * 64), (stu->y_player * 64));
+		stu->render_array[stu->y_player][stu->x_player] = '0';
+		stu->y_player += 1;
+		stu->render_array[stu->y_player][stu->x_player] = 'P';
+	}
+}
+
+void	handle_render_x(t_windows *stu, int keysym)
+{
+	if (keysym == XK_a && (check_move(stu,
+				stu->render_array[stu->y_player][stu->x_player - 1])))
+	{	
+		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr, stu->floor,
+			(stu->x_player * 64), (stu->y_player * 64));
+		stu->render_array[stu->y_player][stu->x_player] = '0';
+		stu->x_player -= 1;
+		stu->render_array[stu->y_player][stu->x_player] = 'P';
+	}
+	if (keysym == XK_d && (check_move(stu,
+				stu->render_array[stu->y_player][stu->x_player + 1])))
+	{	
+		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr, stu->floor,
+			(stu->x_player * 64), (stu->y_player * 64));
+		stu->render_array[stu->y_player][stu->x_player] = '0';
+		stu->x_player += 1;
+		stu->render_array[stu->y_player][stu->x_player] = 'P';
+	}
 }

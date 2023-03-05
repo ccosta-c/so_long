@@ -29,10 +29,10 @@ int	get_height(char *file)
 		i++;
 	}
 	close(fd);
-	return(i);
+	return (i);
 }
 
-int	get_width(t_windows *windows)
+int	get_width(t_windows *stu)
 {
 	int	reference;
 	int	j;
@@ -40,10 +40,10 @@ int	get_width(t_windows *windows)
 
 	reference = 0;
 	j = 0;
-	i= 0;
-	while (j < windows->y_size)
+	i = 0;
+	while (j < stu->y_size)
 	{
-		i = ft_strlenwithoutn(windows->render_array[j]);
+		i = ft_strlenwithoutn(stu->render_array[j]);
 		if (reference == 0)
 			reference = i;
 		if (reference != i)
@@ -53,31 +53,31 @@ int	get_width(t_windows *windows)
 	return (i);
 }
 
-int		check_borders(char **map, t_windows *windows)
+int	check_borders(char **map, t_windows *stu)
 {
-	if (check_line(map, 0, 0, windows))
+	if (check_line(map, 0, 0, stu))
 		return (0);
-	if (check_row(map, (windows->x_size - 1), 0, windows))
-		return (0);	
-	if (check_line(map, 0, (windows->y_size - 1), windows))
+	if (check_row(map, (stu->x_size - 1), 0, stu))
 		return (0);
-	if (check_row(map, 0, 0, windows))
-		return (0);	
+	if (check_line(map, 0, (stu->y_size - 1), stu))
+		return (0);
+	if (check_row(map, 0, 0, stu))
+		return (0);
 	return (1);
 }
 
-int	get_map_size(t_windows *windows, char *file)
+int	get_map_size(t_windows *stu, char *file)
 {
-	windows->y_size = get_height(file);
-	convert_map_to_array(windows, file);
-	windows->x_size = get_width(windows);
-	if (windows->x_size == 0)
+	stu->y_size = get_height(file);
+	convert_map_to_array(stu, file);
+	stu->x_size = get_width(stu);
+	if (stu->x_size == 0)
 	{
 		ft_printf("Lines width is not equal to all of the lines.\n");
 		return (1);
 	}
-	ft_printf("Map Height - %d\n", windows->y_size);
-	ft_printf("Map Width - %d\n", windows->x_size);
+	ft_printf("Map Height - %d\n", stu->y_size);
+	ft_printf("Map Width - %d\n", stu->x_size);
 	ft_printf("--------------------------\n");
 	return (0);
 }

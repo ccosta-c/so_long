@@ -12,40 +12,41 @@
 
 #include "so_long.h"
 
-void	render_wall(t_windows *windows)
+void	render_wall(t_windows *stu)
 {
-	mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->wall, (0 * 64), (0 * 64));
-	mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->wall, (1 * 64), (0 * 64));
-	mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->wall, (2 * 64), (0 * 64));
+	mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr, stu->wall,
+		(0 * 64), (0 * 64));
+	mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr, stu->wall,
+		(1 * 64), (0 * 64));
+	mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr, stu->wall,
+		(2 * 64), (0 * 64));
 }
 
-int		check_move(t_windows *windows, char c)
+int	check_move(t_windows *stu, char c)
 {
-	if (c == '1')
-		return (0);
 	if (c == 'C')
 	{
-		windows->collected += 1;
-		if (windows->nbr_collectibles == windows->collected)
+		stu->collected += 1;
+		if (stu->nbr_collectibles == stu->collected)
 		{
-			mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->door_open, (windows->x_exit * 64), (windows->y_exit * 64));
-			windows->render_array[windows->y_exit][windows->x_exit] = 'S';
+			mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
+				stu->door_open, (stu->x_exit * 64), (stu->y_exit * 64));
+			stu->render_array[stu->y_exit][stu->x_exit] = 'S';
 		}
-		
 	}
-	if (c == 'E')
+	if (c == 'E' || c == '1')
 		return (0);
 	if (c == 'S')
 	{
 		ft_printf("CONGRATULATIONS!!! YOU MADE IT TO THE EXIT!\n");
-		end_game(windows);
+		end_game(stu);
 	}
 	if (c == 'I' || c == 'L')
 	{
 		ft_printf("YOU GOT HIT BY AN ENEMY! GAME OVER!\n");
-		end_game(windows);
+		end_game(stu);
 	}
-	windows->moves += 1;
+	stu->moves += 1;
 	return (1);
 }
 
@@ -60,40 +61,44 @@ char	*put_text(char *text, int nbr)
 	return (str);
 }
 
-void	player_animation(t_windows *windows, int i, int j)
+void	player_animation(t_windows *stu, int i, int j)
 {
 	static int	x;	
-	
+
 	if (x == 0)
-		mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->idle_1, (j * 64), (i * 64));
+		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
+			stu->idle_1, (j * 64), (i * 64));
 	if (x == 1000)
-		mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->idle_2, (j * 64), (i * 64));
+		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
+			stu->idle_2, (j * 64), (i * 64));
 	if (x == 2000)
-		mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->idle_3, (j * 64), (i * 64));
+		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
+			stu->idle_3, (j * 64), (i * 64));
 	if (x == 3000)
-		mlx_put_image_to_window(windows->mlx_ptr, windows->win_ptr, windows->idle_4, (j * 64), (i * 64));
+		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
+			stu->idle_4, (j * 64), (i * 64));
 	if (x == 3000)
 		x = 0;
 	x++;
 }
 
-int	check_line(char **map, int x, int y, t_windows *windows)
+int	check_line(char **map, int x, int y, t_windows *stu)
 {
-	while(x < windows->x_size)
+	while (x < stu->x_size)
 	{
 		if (map[y][x] != '1')
-			return(1);
+			return (1);
 		x++;
 	}
 	return (0);
 }
 
-int	check_row(char **map, int x, int y, t_windows *windows)
+int	check_row(char **map, int x, int y, t_windows *stu)
 {
-	while(y < windows->y_size)
+	while (y < stu->y_size)
 	{
 		if (map[y][x] != '1')
-			return(1);
+			return (1);
 		y++;
 	}
 	return (0);

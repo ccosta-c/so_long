@@ -12,18 +12,19 @@
 
 #include "so_long.h"
 
-int	changes(t_windows *windows)
+int	changes(t_windows *stu)
 {
-	static int i;
-	if(i == 5000)
+	static int	i;
+
+	if (i == 5000)
 	{
-		enemy_trigger(windows);
+		enemy_trigger(stu);
 		i = 0;
 	}
-	player_animation(windows, windows->y_player, windows->x_player);
-	enemy_animation(windows);
-	render_wall(windows);
-	text_to_screen(windows);
+	player_animation(stu, stu->y_player, stu->x_player);
+	enemy_animation(stu);
+	render_wall(stu);
+	text_to_screen(stu);
 	i++;
 	return (0);
 }
