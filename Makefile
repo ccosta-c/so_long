@@ -58,7 +58,7 @@ $(NAME): $(TARGET)
 	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $(GREEN)mlx/*$(RESET)"
 	make $(MKFLAGS) -sC $(LIBX)
 
-	$(CC) $(CFLAGS) main.c $(TARGET) $(LIBFTFLAGS) $(LIBXFLAGS) -g -o $(NAME) -I $(DEPS)
+	$(CC) $(CFLAGS) main.c $(TARGET) $(LIBFTFLAGS) $(LIBXFLAGS) -o $(NAME) -I $(DEPS)
 	
 	echo "$(GREEN)Done.$(RESET)"
 	
