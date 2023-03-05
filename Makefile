@@ -55,7 +55,9 @@ all: $(NAME)
 $(NAME): $(TARGET)
 	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $(GREEN)libft/*$(RESET)"
 	make $(MKFLAGS) -C $(LIBFT)
-	
+	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $(GREEN)mlx/*$(RESET)"
+	make $(MKFLAGS) -sC $(LIBX)
+
 	$(CC) $(CFLAGS) main.c $(TARGET) $(LIBFTFLAGS) $(LIBXFLAGS) -g -o $(NAME) -I $(DEPS)
 	
 	echo "$(GREEN)Done.$(RESET)"
@@ -66,6 +68,9 @@ $(NAME): $(TARGET)
 
 clean:
 	make clean $(MKFLAGS) -C $(LIBFT)
+	echo "[$(RED) Deleted $(RESET)] $(GREEN)libft/*.o$(RESET)"
+	make clean $(MKFLAGS) -C $(LIBX)
+	echo "[$(RED) Deleted $(RESET)] $(GREEN)mlx/*.o$(RESET)"
 	echo "[$(RED) Deleted $(RESET)] $(GREEN)*/*.o$(RESET)"
 	$(RM) $(TARGET) $(TARGET_BONUS)
 

@@ -60,13 +60,13 @@ typedef struct s_windows
 	int			moves;
 	int			rand;
 	char		**render_array;
-	void		*floor;
 	int			image_width;
 	int			image_height;
 	char		*str_moves;
 	char		*str_collectibles;
 	char		*str_total_collectibles;
 	char		*str_join_collectibles;
+	void		*floor;
 	void		*wall;
 	void		*collectible;
 	void		*door_closed;
