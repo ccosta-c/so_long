@@ -16,7 +16,7 @@ int	map_checker(char **map, t_windows *stu)
 {
 	if (!(check_borders(map, stu)))
 	{
-		ft_printf("\033[1;31mERROR! The map doesn't have valid borders.\033[0m\n");
+		ft_printf("\033[1;31mERROR! Invalid borders.\033[0m\n");
 		return (0);
 	}
 	ft_printf("Number of Collectibles - %d\n", stu->nbr_collectibles);
@@ -65,12 +65,12 @@ int	check_map_info(char **map, t_windows *stu)
 	stu->exits = 0;
 	if (check_quant(map, stu))
 	{
-		ft_printf("\033[1;31mERROR! Invalid characters on the map.\033[0m\n");
+		ft_printf("\033[1;31mERROR! Invalid characters.\033[0m\n");
 		return (1);
 	}
 	if (stu->nbr_collectibles < 1)
 	{
-		ft_printf("\033[1;31mERROR! There's no collectibles on the map.\033[0m\n");
+		ft_printf("\033[1;31mERROR! No collectibles.\033[0m\n");
 		return (1);
 	}
 	return (0);

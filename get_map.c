@@ -19,7 +19,7 @@ int	get_map_size(t_windows *stu, char *file)
 	stu->x_size = get_width(stu);
 	if (stu->x_size == 0)
 	{
-		ft_printf("\033[1;31mERROR! Lines width is not equal to all lines. \033[0m\n");
+		ft_printf("\033[1;31mERROR! Lines width is not equal.\033[0m\n");
 		return (1);
 	}
 	ft_printf("Map Height - %d\n", stu->y_size);

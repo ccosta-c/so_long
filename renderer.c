@@ -86,7 +86,7 @@ int	check_move(t_windows *stu, char c)
 		return (0);
 	if (c == 'S')
 	{
-		ft_printf("\033[1;32m✨CONGRATULATIONS! YOU MADE IT TO THE EXIT!✨\033[0m\n");
+		ft_printf("\033[1;32m✨CONGRATULATIONS! YOU WON!✨\033[0m\n");
 		end_game(stu);
 	}
 	if (c == 'I' || c == 'L')
