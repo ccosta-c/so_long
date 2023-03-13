@@ -5,49 +5,44 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 11:18:25 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/03/03 12:18:21 by ccosta-c         ###   ########.fr       */
+/*   Created: 2023/03/05 21:42:16 by ccosta-c          #+#    #+#             */
+/*   Updated: 2023/03/05 21:52:50 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	render_wall(t_windows *stu)
+void	free_array(char **array, int y)
 {
-	mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr, stu->wall,
-		(0 * 64), (0 * 64));
-	mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr, stu->wall,
-		(1 * 64), (0 * 64));
-	mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr, stu->wall,
-		(2 * 64), (0 * 64));
+	int	i;
+
+	i = 0;
+	while (i < y)
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
 }
 
-int	check_move(t_windows *stu, char c)
+void	ft_print_array(t_windows *stu, char **array)
 {
-	if (c == 'C')
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < stu->y_size)
 	{
-		stu->collected += 1;
-		if (stu->nbr_collectibles == stu->collected)
+		while (array && array[i][j] != '\0')
 		{
-			mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
-				stu->door_open, (stu->x_exit * 64), (stu->y_exit * 64));
-			stu->render_array[stu->y_exit][stu->x_exit] = 'S';
+			ft_printf("%c", array[i][j]);
+			j++;
 		}
+		i++;
+		j = 0;
+		ft_printf("\n");
 	}
-	if (c == 'E' || c == '1')
-		return (0);
-	if (c == 'S')
-	{
-		ft_printf("CONGRATULATIONS!!! YOU MADE IT TO THE EXIT!\n");
-		end_game(stu);
-	}
-	if (c == 'I' || c == 'L')
-	{
-		ft_printf("YOU GOT HIT BY AN ENEMY! GAME OVER!\n");
-		end_game(stu);
-	}
-	stu->moves += 1;
-	return (1);
 }
 
 char	*put_text(char *text, int nbr)
@@ -61,45 +56,28 @@ char	*put_text(char *text, int nbr)
 	return (str);
 }
 
-void	player_animation(t_windows *stu, int i, int j)
+void	random_generator(t_windows *stu)
 {
-	static int	x;	
-
-	if (x == 0)
-		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
-			stu->idle_1, (j * 64), (i * 64));
-	if (x == 1000)
-		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
-			stu->idle_2, (j * 64), (i * 64));
-	if (x == 2000)
-		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
-			stu->idle_3, (j * 64), (i * 64));
-	if (x == 3000)
-		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
-			stu->idle_4, (j * 64), (i * 64));
-	if (x == 3000)
-		x = 0;
-	x++;
+	srand(clock());
+	stu->rand = rand();
+	stu->rand = stu->rand % (4 - 1 + 1) + 1;
 }
 
-int	check_line(char **map, int x, int y, t_windows *stu)
+void	text_to_screen(t_windows *stu)
 {
-	while (x < stu->x_size)
-	{
-		if (map[y][x] != '1')
-			return (1);
-		x++;
-	}
-	return (0);
-}
-
-int	check_row(char **map, int x, int y, t_windows *stu)
-{
-	while (y < stu->y_size)
-	{
-		if (map[y][x] != '1')
-			return (1);
-		y++;
-	}
-	return (0);
+	stu->str_collectibles = put_text("Collectibles Collected: ",
+			stu->collected);
+	stu->str_total_collectibles = put_text("/",
+			stu->nbr_collectibles);
+	stu->str_join_collectibles = ft_strjoin(stu->str_collectibles,
+			stu->str_total_collectibles);
+	mlx_string_put(stu->mlx_ptr, stu->win_ptr, 10, 32, 0xFFFFFF,
+		stu->str_join_collectibles);
+	stu->str_moves = put_text("Moves: ", stu->moves);
+	mlx_string_put(stu->mlx_ptr, stu->win_ptr, 10, 20, 0xFFFFFF,
+		stu->str_moves);
+	free(stu->str_total_collectibles);
+	free(stu->str_join_collectibles);
+	free(stu->str_collectibles);
+	free(stu->str_moves);
 }

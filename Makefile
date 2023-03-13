@@ -6,7 +6,7 @@
 #    By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/16 09:58:27 by ccosta-c          #+#    #+#              #
-#    Updated: 2023/03/02 10:38:48 by ccosta-c         ###   ########.fr        #
+#    Updated: 2023/03/05 22:12:24 by ccosta-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ LIBFT		= libft
 LIBX 		= mlx
 
 #_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_ FILES _/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_/=\_
-SRC				= check_map.c ft_print_array.c get_map.c map_size.c utils.c draw_windows.c free_array.c draw_map.c enemies.c overhaul.c
+SRC				= initialize.c enemies.c utils.c map_checker.c renderer.c get_map.c check_borders.c windows.c
 OBJS 			:= $(SRC:.c=.o)
 OBJS_BONUS		= 
 NAME			= so_long
@@ -58,7 +58,7 @@ $(NAME): $(TARGET)
 	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $(GREEN)mlx/*$(RESET)"
 	make $(MKFLAGS) -sC $(LIBX)
 
-	$(CC) $(CFLAGS) main.c $(TARGET) $(LIBFTFLAGS) $(LIBXFLAGS) -o $(NAME) -I $(DEPS)
+	$(CC) $(CFLAGS) main.c $(TARGET) $(LIBFTFLAGS) $(LIBXFLAGS) -o $(NAME) -I $(DEPS) -g
 	
 	echo "$(GREEN)Done.$(RESET)"
 	

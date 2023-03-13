@@ -6,7 +6,7 @@
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:39:10 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/03/03 12:24:09 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/03/06 15:35:42 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,43 +81,41 @@ typedef struct s_windows
 	void		*enemy_4;
 }	t_windows;
 
+int				end_game(t_windows *windows);
+int				changes(t_windows *windows);
+void			player_animation(t_windows *windows, int i, int j);
+void			enemy_animation(t_windows *windows);
+void			sprite_enemies(t_windows *stu, int y, int x);
+void			render_wall(t_windows *windows);
+void 			enemy_trigger(t_windows *windows);
+int				check_enemy_move(t_windows *windows, char c);
+void   			enemy_movement_x(t_windows *windows, int y, int x, char two);
+void    		enemy_movement_y(t_windows *windows, int y, int x, char two);
+void 			change_enemies(t_windows *windows, char one, char two);
+void			free_array(char **array, int y);
+void			ft_print_array(t_windows *windows, char **array);
+char			*put_text(char *text, int nbr);
+void    		random_generator(t_windows *windows);
+void 			text_to_screen(t_windows *windows);
+int				map_checker(char **map, t_windows *windows);
+void			check_map(char **map, t_windows *stu, int x, int y);
+int				check_map_info(char **map, t_windows *windows);
+void			check_char_map(t_windows *windows, int i, int j);
+int				check_quant(char **map, t_windows *window);
+int				handle_render(int keysym, t_windows *data);
+void			handle_render_x(t_windows *stu, int keysym);
+void			handle_render_y(t_windows *stu, int keysym);
+int				check_move(t_windows *windows, char c);
+int				get_map_size(t_windows *windows, char *file);
 int				get_height(char *file);
 int				get_width(t_windows *windows);
-int				get_map_size(t_windows *windows, char *file);
 int				convert_map_to_array(t_windows *windows, char *file);
-void			ft_print_array(t_windows *windows, char **array);
-int				check_map_info(char **map, t_windows *windows);
-int				map_checker(char **map, t_windows *windows);
-int				check_quant(char **map, t_windows *window);
-void			texture_drawing(t_windows *windows, int i, int j);
+void 			get_lines(t_windows *stu, int fd, char *lines, t_coordinates xandy);
 int				check_borders(char **map, t_windows *windows);
-int				draw_windows(t_windows *windows);
-int				check_line(char **map, int x, int y, t_windows *windows);
 int				check_row(char **map, int x, int y, t_windows *windows);
-void			free_array(char **array, int y);
+int				check_line(char **map, int x, int y, t_windows *windows);
+int				draw_windows(t_windows *windows);
 int				draw_map(t_windows *windows);
-int				handle_render(int keysym, t_windows *data);
-int				handle_no_event(void *data);
+void			texture_drawing(t_windows *windows, int i, int j);
 void			initialize(t_windows *windows);
 void			initialize_sprites(t_windows *windows);
-void			player_animation(t_windows *windows, int i, int j);
-void			change_array(t_windows *windows, int x, int y, char chr);
-int				check_move(t_windows *windows, char c);
-char			*put_text(char *text, int nbr);
-int				end_game(t_windows *windows);
-void			enemy_animation(t_windows *windows);
-int				check_enemy_move(t_windows *windows, char c);
-void 			change_enemies(t_windows *windows, char one, char two);
-void    		random_generator(t_windows *windows);
-void 			enemy_trigger(t_windows *windows);
-void   			enemy_movement(t_windows *windows, int y, int x, char two);
-void    		enemy_movement_y(t_windows *windows, int y, int x, char two);
-void   			enemy_movement_x(t_windows *windows, int y, int x, char two);
-int				changes(t_windows *windows);
-void			render_wall(t_windows *windows);
-void 			text_to_screen(t_windows *windows);
-void			check_char_map(t_windows *windows, int i, int j);
-void			handle_render_y(t_windows *stu, int keysym);
-void			handle_render_x(t_windows *stu, int keysym);
-void			sprite_enemies(t_windows *stu, int y, int x);
-void 			get_lines(t_windows *stu, int fd, char *lines, t_coordinates xandy);

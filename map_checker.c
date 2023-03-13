@@ -1,16 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 08:55:27 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/03/01 14:14:51 by ccosta-c         ###   ########.fr       */
+/*   Created: 2023/03/05 21:44:11 by ccosta-c          #+#    #+#             */
+/*   Updated: 2023/03/06 15:52:44 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	map_checker(char **map, t_windows *stu)
+{
+	if (!(check_borders(map, stu)))
+	{
+		ft_printf("\033[1;31mERROR! The map doesn't have valid borders.\033[0m\n");
+		return (0);
+	}
+	ft_printf("Number of Collectibles - %d\n", stu->nbr_collectibles);
+	ft_printf("Player Position X-%d Y-%d\n",
+		stu->x_player, stu->y_player);
+	if (stu->exits != 1 || stu->players != 1)
+	{	
+		ft_printf("\033[1;31mERROR! The map is not valid.\033[0m\n");
+		return (0);
+	}
+	check_map(map, stu, stu->x_player, stu->y_player);
+	if ((stu->collectibles_found != stu->nbr_collectibles)
+		|| (stu->found_exit != 1))
+	{
+		ft_printf("\033[1;31mERROR! The map is not valid.\033[0m\n");
+		return (0);
+	}
+	ft_printf("The map is valid.\n");
+	return (1);
+}
 
 void	check_map(char **map, t_windows *stu, int x, int y)
 {
@@ -30,55 +56,6 @@ void	check_map(char **map, t_windows *stu, int x, int y)
 	}
 }
 
-int	map_checker(char **map, t_windows *stu)
-{
-	if (!(check_borders(map, stu)))
-	{
-		ft_printf("The map doesen't have valid borders.\n");
-		return (0);
-	}
-	ft_printf("Number of Collectibles - %d\n", stu->nbr_collectibles);
-	ft_printf("Player Position X-%d Y-%d\n",
-		stu->x_player, stu->y_player);
-	if (stu->exits != 1 || stu->players != 1)
-	{	
-		ft_printf("Map is not valid.\n");
-		return (0);
-	}
-	check_map(map, stu, stu->x_player, stu->y_player);
-	if ((stu->collectibles_found != stu->nbr_collectibles)
-		|| (stu->found_exit != 1))
-	{
-		ft_printf("Map is not valid.\n");
-		return (0);
-	}
-	ft_printf("Map is valid!\n");
-	return (1);
-}
-
-int	check_quant(char **map, t_windows *stu)
-{
-	int			i;
-	int			j;
-
-	i = 0;
-	j = 0;
-	while (i < stu->y_size)
-	{
-		while (map[i][j] != '\0')
-		{
-			if (map[i][j] != '1' && map[i][j] != 'P' && map[i][j] != 'E'
-				&& map[i][j] != 'C' && map[i][j] != '0' && map[i][j] != 'I')
-				return (1);
-			check_char_map(stu, i, j);
-			j++;
-		}
-		i++;
-		j = 0;
-	}
-	return (0);
-}
-
 int	check_map_info(char **map, t_windows *stu)
 {
 	stu->nbr_collectibles = 0;
@@ -88,12 +65,12 @@ int	check_map_info(char **map, t_windows *stu)
 	stu->exits = 0;
 	if (check_quant(map, stu))
 	{
-		ft_printf("Invalid characters in the file.");
+		ft_printf("\033[1;31mERROR! Invalid characters on the map.\033[0m\n");
 		return (1);
 	}
 	if (stu->nbr_collectibles < 1)
 	{
-		ft_printf("There's no collectibles in the map.");
+		ft_printf("\033[1;31mERROR! There's no collectibles on the map.\033[0m\n");
 		return (1);
 	}
 	return (0);
@@ -118,4 +95,27 @@ void	check_char_map(t_windows *stu, int i, int j)
 		stu->x_exit = j;
 		stu->y_exit = i;
 	}
+}
+
+int	check_quant(char **map, t_windows *stu)
+{
+	int			i;
+	int			j;
+
+	i = 0;
+	j = 0;
+	while (i < stu->y_size)
+	{
+		while (map[i][j] != '\0')
+		{
+			if (map[i][j] != '1' && map[i][j] != 'P' && map[i][j] != 'E'
+				&& map[i][j] != 'C' && map[i][j] != '0' && map[i][j] != 'I')
+				return (1);
+			check_char_map(stu, i, j);
+			j++;
+		}
+		i++;
+		j = 0;
+	}
+	return (0);
 }
