@@ -16,7 +16,7 @@ int	changes(t_windows *stu)
 {
 	static int	i;
 
-	if (i == 5000)
+	if (i == 1000)
 	{
 		enemy_trigger(stu);
 		i = 0;
@@ -74,19 +74,19 @@ void	sprite_enemies(t_windows *stu, int y, int x)
 {
 	static int	q;
 
-	if (q < 1000)
+	if (q < 1500)
 		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
 			stu->enemy_1, (x * 64), (y * 64));
-	if (q >= 1000 && q < 2000)
+	if (q >= 1500 && q < 3000)
 		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
 			stu->enemy_2, (x * 64), (y * 64));
-	if (q >= 2000 && q < 3000)
+	if (q >= 3000 && q < 4500)
 		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
 			stu->enemy_3, (x * 64), (y * 64));
-	if (q >= 3000 && q <= 4000)
+	if (q >= 4500 && q <= 6000)
 		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
 			stu->enemy_4, (x * 64), (y * 64));
-	if (q == 4000)
+	if (q == 6000)
 		q = 0;
 	q++;
 }
