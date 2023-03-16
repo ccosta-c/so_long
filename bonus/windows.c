@@ -68,6 +68,9 @@ void	texture_drawing(t_windows *stu, int i, int j)
 	if (stu->render_array[i][j] == 'S')
 		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
 			stu->door_open, (j * 64), (i * 64));
+	if (stu->render_array[i][j] == 'I')
+		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
+			stu->enemy_1, (j * 64), (i * 64));
 }
 
 void	initialize(t_windows *stu)
@@ -94,5 +97,13 @@ void	initialize_sprites(t_windows *stu)
 	stu->idle_3 = mlx_xpm_file_to_image(stu->mlx_ptr, IDLE_3,
 			&stu->image_width, &stu->image_height);
 	stu->idle_4 = mlx_xpm_file_to_image(stu->mlx_ptr, IDLE_4,
+			&stu->image_width, &stu->image_height);
+	stu->enemy_1 = mlx_xpm_file_to_image(stu->mlx_ptr, ENEMY_1,
+			&stu->image_width, &stu->image_height);
+	stu->enemy_2 = mlx_xpm_file_to_image(stu->mlx_ptr, ENEMY_2,
+			&stu->image_width, &stu->image_height);
+	stu->enemy_3 = mlx_xpm_file_to_image(stu->mlx_ptr, ENEMY_3,
+			&stu->image_width, &stu->image_height);
+	stu->enemy_4 = mlx_xpm_file_to_image(stu->mlx_ptr, ENEMY_4,
 			&stu->image_width, &stu->image_height);
 }

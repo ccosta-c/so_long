@@ -14,9 +14,18 @@
 
 int	changes(t_windows *stu)
 {
+	static int	i;
+
+	if (i == 2000)
+	{
+		enemy_trigger(stu);
+		i = 0;
+	}
 	player_animation(stu, stu->y_player, stu->x_player);
+	enemy_animation(stu);
 	render_wall(stu);
 	text_to_screen(stu);
+	i++;
 	return (0);
 }
 
@@ -39,6 +48,47 @@ void	player_animation(t_windows *stu, int i, int j)
 	if (x == 4500)
 		x = 0;
 	x++;
+}
+
+void	enemy_animation(t_windows *stu)
+{
+	int				x;
+	int				y;
+
+	y = -1;
+	while (++y < stu->y_size)
+	{
+		x = -1;
+		while (++x < stu->x_size)
+		{
+			if (stu->render_array[y][x] == 'I'
+				|| stu->render_array[y][x] == 'L')
+			{
+				sprite_enemies(stu, y, x);
+			}
+		}
+	}
+}
+
+void	sprite_enemies(t_windows *stu, int y, int x)
+{
+	static int	q;
+
+	if (q < 3000)
+		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
+			stu->enemy_1, (x * 64), (y * 64));
+	if (q >= 3000 && q < 6000)
+		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
+			stu->enemy_2, (x * 64), (y * 64));
+	if (q >= 6000 && q < 9000)
+		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
+			stu->enemy_3, (x * 64), (y * 64));
+	if (q >= 9000 && q <= 12000)
+		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
+			stu->enemy_4, (x * 64), (y * 64));
+	if (q == 12000)
+		q = 0;
+	q++;
 }
 
 void	render_wall(t_windows *stu)

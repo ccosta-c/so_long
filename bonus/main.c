@@ -51,6 +51,10 @@ int	end_game(t_windows *stu)
 	mlx_destroy_image(stu->mlx_ptr, stu->idle_2);
 	mlx_destroy_image(stu->mlx_ptr, stu->idle_3);
 	mlx_destroy_image(stu->mlx_ptr, stu->idle_4);
+	mlx_destroy_image(stu->mlx_ptr, stu->enemy_1);
+	mlx_destroy_image(stu->mlx_ptr, stu->enemy_2);
+	mlx_destroy_image(stu->mlx_ptr, stu->enemy_3);
+	mlx_destroy_image(stu->mlx_ptr, stu->enemy_4);
 	mlx_destroy_window(stu->mlx_ptr, stu->win_ptr);
 	mlx_destroy_display(stu->mlx_ptr);
 	free_array(stu->render_array, stu->y_size);

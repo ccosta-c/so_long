@@ -56,6 +56,13 @@ char	*put_text(char *text, int nbr)
 	return (str);
 }
 
+void	random_generator(t_windows *stu)
+{
+	srand(clock());
+	stu->rand = rand();
+	stu->rand = stu->rand % (4 - 1 + 1) + 1;
+}
+
 void	text_to_screen(t_windows *stu)
 {
 	stu->str_collectibles = put_text("Collectibles Collected: ",

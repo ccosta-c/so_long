@@ -89,6 +89,11 @@ int	check_move(t_windows *stu, char c)
 		ft_printf("\033[1;32m✨CONGRATULATIONS! YOU WON!✨\033[0m\n");
 		end_game(stu);
 	}
+	if (c == 'I' || c == 'L')
+	{
+		ft_printf("\033[1;31m💀GAME OVER! YOU GOT HIT BY AN ENEMY!💀\033[0m\n");
+		end_game(stu);
+	}
 	stu->moves += 1;
 	return (1);
 }

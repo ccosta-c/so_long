@@ -13,7 +13,7 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include <stdlib.h>
 # include <X11/keysym.h>
 # include <stdio.h>
@@ -21,7 +21,7 @@
 # include <unistd.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <time.h>
 
 # define WALL_PATH "./textures/wall.xpm"
@@ -33,6 +33,10 @@
 # define IDLE_2 "./textures/idle_2.xpm"
 # define IDLE_3 "./textures/idle_3.xpm"
 # define IDLE_4 "./textures/idle_4.xpm"
+# define ENEMY_1 "./textures/enemy_1.xpm"
+# define ENEMY_2 "./textures/enemy_2.xpm"
+# define ENEMY_3 "./textures/enemy_3.xpm"
+# define ENEMY_4 "./textures/enemy_4.xpm"
 
 typedef struct s_coordinates
 {
@@ -83,10 +87,18 @@ typedef struct s_windows
 int				end_game(t_windows *windows);
 int				changes(t_windows *windows);
 void			player_animation(t_windows *windows, int i, int j);
+void			enemy_animation(t_windows *windows);
+void			sprite_enemies(t_windows *stu, int y, int x);
 void			render_wall(t_windows *windows);
+void			enemy_trigger(t_windows *windows);
+int				check_enemy_move(t_windows *windows, char c);
+void			enemy_movement_x(t_windows *windows, int y, int x, char two);
+void			enemy_movement_y(t_windows *windows, int y, int x, char two);
+void			change_enemies(t_windows *windows, char one, char two);
 void			free_array(char **array, int y);
 void			ft_print_array(t_windows *windows, char **array);
 char			*put_text(char *text, int nbr);
+void			random_generator(t_windows *windows);
 void			text_to_screen(t_windows *windows);
 int				map_checker(char **map, t_windows *windows);
 void			check_map(char **map, t_windows *stu, int x, int y);

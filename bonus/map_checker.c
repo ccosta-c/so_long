@@ -109,7 +109,7 @@ int	check_quant(char **map, t_windows *stu)
 		while (map[i][j] != '\0')
 		{
 			if (map[i][j] != '1' && map[i][j] != 'P' && map[i][j] != 'E'
-				&& map[i][j] != 'C' && map[i][j] != '0')
+				&& map[i][j] != 'C' && map[i][j] != '0' && map[i][j] != 'I')
 				return (1);
 			check_char_map(stu, i, j);
 			j++;
