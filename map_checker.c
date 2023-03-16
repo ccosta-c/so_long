@@ -16,25 +16,26 @@ int	map_checker(char **map, t_windows *stu)
 {
 	if (!(check_borders(map, stu)))
 	{
-		ft_printf("\033[1;31mERROR! Invalid borders.\033[0m\n");
+		ft_printf("\033[1;31mERROR!\nInvalid borders.\033[0m\n");
 		return (0);
 	}
-	ft_printf("Number of Collectibles - %d\n", stu->nbr_collectibles);
-	ft_printf("Player Position X-%d Y-%d\n",
-		stu->x_player, stu->y_player);
 	if (stu->exits != 1 || stu->players != 1)
 	{	
-		ft_printf("\033[1;31mERROR! The map is not valid.\033[0m\n");
+		ft_printf("\033[1;31mERROR!\nWrong number of players/exits.\033[0m\n");
 		return (0);
 	}
 	check_map(map, stu, stu->x_player, stu->y_player);
-	if ((stu->collectibles_found != stu->nbr_collectibles)
-		|| (stu->found_exit != 1))
+	if (stu->found_exit != 1)
 	{
-		ft_printf("\033[1;31mERROR! The map is not valid.\033[0m\n");
+		ft_printf("\033[1;31mERROR!\nCan't reach the exit.\033[0m\n");
 		return (0);
 	}
-	ft_printf("The map is valid.\n");
+	if (stu->collectibles_found != stu->nbr_collectibles)
+	{
+		ft_printf("\033[1;31mERROR!\nCan't reach all collectibles.\033[0m\n");
+		return (0);
+	}
+	ft_printf("The map is valid!\n");
 	return (1);
 }
 
@@ -65,12 +66,12 @@ int	check_map_info(char **map, t_windows *stu)
 	stu->exits = 0;
 	if (check_quant(map, stu))
 	{
-		ft_printf("\033[1;31mERROR! Invalid characters.\033[0m\n");
+		ft_printf("\033[1;31mERROR!\nInvalid characters.\033[0m\n");
 		return (1);
 	}
 	if (stu->nbr_collectibles < 1)
 	{
-		ft_printf("\033[1;31mERROR! No collectibles.\033[0m\n");
+		ft_printf("\033[1;31mERROR!\nNo collectibles.\033[0m\n");
 		return (1);
 	}
 	return (0);

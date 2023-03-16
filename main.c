@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_printf("\033[1;31mERROR! Please specify a map.\033[0m\n");
+		ft_printf("\033[1;31mERROR!\nPlease specify a map.\033[0m\n");
 		return (1);
 	}
 	if (check_dot_ber(argv[1]))
@@ -62,7 +62,7 @@ int	check_dot_ber(char *file)
 {
 	if (ft_strnstr(file, ".ber", ft_strlen(file)) == 0)
 	{
-		ft_printf("\033[1;31mERROR! Wrong extension!\033[0m\n");
+		ft_printf("\033[1;31mERROR!\nWrong extension!\033[0m\n");
 		return (1);
 	}
 	return (0);

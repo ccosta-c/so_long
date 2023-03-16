@@ -15,11 +15,16 @@
 int	get_map_size(t_windows *stu, char *file)
 {
 	stu->y_size = get_height(file);
+	if (stu->y_size == -1)
+	{
+		ft_printf("\033[1;31mERROR!\nFile doesn't exist!\033[0m\n");
+		return (1);
+	}
 	convert_map_to_array(stu, file);
 	stu->x_size = get_width(stu);
 	if (stu->x_size == 0)
 	{
-		ft_printf("\033[1;31mERROR! Lines width is not equal.\033[0m\n");
+		ft_printf("\033[1;31mERROR!\nLines width is not equal.\033[0m\n");
 		return (1);
 	}
 	ft_printf("Map Height - %d\n", stu->y_size);
@@ -35,6 +40,10 @@ int	get_height(char *file)
 	int		fd;
 
 	fd = open(file, O_RDONLY);
+	if (fd < 0)
+	{
+		return (-1);
+	}
 	i = 0;
 	while (1)
 	{
