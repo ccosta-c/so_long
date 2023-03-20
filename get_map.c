@@ -72,7 +72,7 @@ int	get_width(t_windows *stu)
 		if (reference == 0)
 			reference = i;
 		if (reference != i)
-			return (1);
+			return (0);
 		j++;
 	}
 	return (i);

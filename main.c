@@ -16,22 +16,23 @@ int	main(int argc, char **argv)
 {
 	t_windows	stu;
 
-	if (argc != 2)
+	if (checks(argc, argv, &stu))
 	{
-		ft_printf("\033[1;31mERROR!\nPlease specify a map.\033[0m\n");
-		return (1);
-	}
-	if (check_dot_ber(argv[1]))
 		return (0);
-	if (get_map_size(&stu, argv[1]))
-		return (1);
+	}
 	ft_printf("The 2D Map Array Generated\n");
 	ft_print_array(&stu, stu.render_array);
 	ft_printf("--------------------------\n");
 	if (check_map_info(stu.render_array, &stu))
+	{
+		free_array(stu.render_array, stu.y_size);
 		return (1);
+	}
 	if (!(map_checker(stu.render_array, &stu)))
+	{
+		free_array(stu.render_array, stu.y_size);
 		return (0);
+	}
 	stu.collected = 0;
 	stu.moves = 0;
 	free_array(stu.render_array, stu.y_size);
@@ -63,6 +64,23 @@ int	check_dot_ber(char *file)
 	if (ft_strnstr(file, ".ber", ft_strlen(file)) == 0)
 	{
 		ft_printf("\033[1;31mERROR!\nWrong extension!\033[0m\n");
+		return (1);
+	}
+	return (0);
+}
+
+int	checks(int argc, char **argv, t_windows *stu)
+{
+	if (argc != 2)
+	{
+		ft_printf("\033[1;31mERROR!\nPlease specify a map.\033[0m\n");
+		return (1);
+	}
+	if (check_dot_ber(argv[1]))
+		return (1);
+	if (get_map_size(stu, argv[1]))
+	{
+		free_array(stu->render_array, stu->y_size);
 		return (1);
 	}
 	return (0);

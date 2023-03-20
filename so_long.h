@@ -112,5 +112,6 @@ void			texture_drawing(t_windows *windows, int i, int j);
 void			initialize(t_windows *windows);
 void			initialize_sprites(t_windows *windows);
 int				check_dot_ber(char *file);
+int				checks(int argc, char **argv, t_windows *stu);
 
 #endif
