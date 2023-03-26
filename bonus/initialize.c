@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ccosta-c <ccosta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 21:32:25 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/03/05 21:52:54 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/03/26 18:57:16 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ void	player_animation(t_windows *stu, int i, int j)
 		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
 			stu->idle_3, (j * 64), (i * 64));
 	if (x == 4500)
+	{
 		mlx_put_image_to_window(stu->mlx_ptr, stu->win_ptr,
 			stu->idle_4, (j * 64), (i * 64));
-	if (x == 4500)
 		x = 0;
+	}
 	x++;
 }
 

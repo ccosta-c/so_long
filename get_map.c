@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ccosta-c <ccosta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 21:46:56 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/03/06 15:39:04 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/03/26 18:55:31 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ int	get_height(char *file)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-	{
 		return (-1);
-	}
 	i = 0;
 	while (1)
 	{
@@ -53,6 +51,7 @@ int	get_height(char *file)
 		free(line);
 		i++;
 	}
+	free(line);
 	close(fd);
 	return (i);
 }

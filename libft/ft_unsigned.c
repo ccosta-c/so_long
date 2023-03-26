@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unsigned.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ccosta-c <ccosta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:59:06 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/01/18 15:34:51 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/03/26 15:58:08 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 
 int	ft_unsigned(unsigned int nb)
 {

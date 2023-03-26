@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ccosta-c <ccosta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 21:31:07 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/03/06 15:39:59 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/03/26 16:59:11 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,14 @@ int	end_game(t_windows *stu)
 
 int	check_dot_ber(char *file)
 {
-	if (ft_strnstr(file, ".ber", ft_strlen(file)) == 0)
-	{
-		ft_printf("\033[1;31mERROR!\nWrong extension!\033[0m\n");
-		return (1);
-	}
-	return (0);
+	int	i;
+
+	i = ft_strlen(file);
+	i -= 4;
+	if (ft_strncmp(&file[i], ".ber", 4) == 0)
+		return (0);
+	ft_printf("\033[1;31mERROR!\nWrong extension!\033[0m\n");
+	return (1);
 }
 
 int	checks(int argc, char **argv, t_windows *stu)

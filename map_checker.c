@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccosta-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ccosta-c <ccosta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 21:44:11 by ccosta-c          #+#    #+#             */
-/*   Updated: 2023/03/06 15:52:44 by ccosta-c         ###   ########.fr       */
+/*   Updated: 2023/03/26 18:58:07 by ccosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,8 @@ void	check_char_map(t_windows *stu, int i, int j)
 		stu->nbr_collectibles++;
 	if (stu->render_array[i][j] == 'P')
 	{
-		if (stu->players == 0)
-		{
-			stu->x_player = j;
-			stu->y_player = i;
-		}
+		stu->x_player = j;
+		stu->y_player = i;
 		stu->players++;
 	}
 	if (stu->render_array[i][j] == 'E')
